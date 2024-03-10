@@ -1,1 +1,37 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/plain,text/css,application/javascript,application/json
+    min-response-size: 2048
+  tomcat:
+    connection-timeout: 300000
+spring:
+  application:
+    name: wooma
+  datasource:
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/wooma?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: ENC(test)
+    password: ENC(test)
+#    driver-class-name:
+  data:
+    mongodb:
+      username: ENC(test)
+      password: ENC(test)
+      database: wooma-mongo
+      host: ENC(test)
+      port: 27017
+      authentication-database: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+  jackson:
+    time-zone: Asia/Seoul
 
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+kakao:
+  oauth-uri: https://kauth.kakao.com/oauth
+  key:
+    rest-api: ENC(QfUeGCljsVvcRTiYAlmRprmoeTmvMA+IvWVgcKhps6NfI0ENvblERyMgaeiVJwSr6KdJ3MVFOSk)
