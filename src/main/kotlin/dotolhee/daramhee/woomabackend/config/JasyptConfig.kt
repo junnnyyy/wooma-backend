@@ -19,9 +19,6 @@ class JasyptConfig {
     @Bean("jasyptStringEncryptor")
     fun stringEncryptor(): StringEncryptor {
 
-        /**
-         * @see key파일 받아오는것으로 변경 필요
-         * */
         val keyFile: File = ResourceUtils.getFile("classpath:key/secret.key")
         val key = keyFile.readText(Charsets.UTF_8)
         val encryptor = PooledPBEStringEncryptor()
@@ -36,7 +33,7 @@ class JasyptConfig {
         encryptor.setConfig(config)
 
         // 암복호화 테스트
-        val encryptValue = encryptor.encrypt("")
+        val encryptValue = encryptor.encrypt(" ")
         print("암호화 된 값 $encryptValue\n")
         val decryptValue = encryptor.decrypt(encryptValue)
         println("복호화 된 값 $decryptValue\n")

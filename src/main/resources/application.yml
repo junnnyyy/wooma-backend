@@ -10,21 +10,32 @@ spring:
   application:
     name: wooma
   datasource:
-    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/wooma?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    username: ENC(test)
-    password: ENC(test)
-#    driver-class-name:
-  data:
-    mongodb:
-      username: ENC(test)
-      password: ENC(test)
-      database: wooma-mongo
-      host: ENC(test)
-      port: 27017
-      authentication-database: admin
+    url: jdbc:mysql://localhost:3306/wooma?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
+    username: ENC(jfmVuCZXLZ86dqrgE6tgdXnOE0NQ4pIA)
+    password: ENC(SbSyEVfK+yIsgExwBbRpCIe99zHQRK1DUi9TjgbBKQA=)
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-name: wooma-web
+            client-id: ENC(gyuRB0vCke3ZkvWNbCgvh/2OCGSjyByCJ8LDX7AGeFUH6/Hp9OVZFAfFKnqy/dHF3OAfDG+jlGfeTtoHO5Izy6PWl7RzGj8hcGCCH0M0oM3aj9VVLt+NR4TAZ+oGMNZq)
+            client-secret: ENC(kzv0eeCxY4C35Iqdv9eLFn3O/qJfNaSZrgVdTnVzBqjbRodLaIu0GVi8cynxJ1GqGAjcoWdtQ0M=)
+#          kakao:
+#            oauth-api-host: https://kauth.kakao.com/oauth
+#            key:
+#              client-id: ENC(kqjMcJp110C+i7K3uN45BkY2zqP9Ku17)
+#              rest-api: ENC(QfUeGCljsVvcRTiYAlmRprmoeTmvMA+IvWVgcKhps6NfI0ENvblERyMgaeiVJwSr6KdJ3MVFOSk)
+
+
+
   jackson:
     time-zone: Asia/Seoul
 
@@ -32,6 +43,7 @@ jasypt:
   encryptor:
     algorithm: PBEWithMD5AndDES
 kakao:
-  oauth-uri: https://kauth.kakao.com/oauth
+  oauth-api-host: https://kauth.kakao.com/oauth
   key:
+    client-id: ENC(kqjMcJp110C+i7K3uN45BkY2zqP9Ku17)
     rest-api: ENC(QfUeGCljsVvcRTiYAlmRprmoeTmvMA+IvWVgcKhps6NfI0ENvblERyMgaeiVJwSr6KdJ3MVFOSk)
