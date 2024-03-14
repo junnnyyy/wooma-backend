@@ -1,11 +1,13 @@
 package dotolhee.daramhee.woomabackend.entity
 
 import dotolhee.daramhee.woomabackend.OAuthProvider
+import dotolhee.daramhee.woomabackend.dto.MemberDTO
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
 class Member(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -24,27 +26,38 @@ class Member(
     val name: String,
 
     @Column
-    var token: String?,
+    var token: String? = null,
 
     @Column
-    var refreshToken: String?,
+    var refreshToken: String? = null,
 
     @Column
-    var tokenExpiredAt: LocalDateTime?,
+    var tokenExpiredAt: LocalDateTime? = null,
 
     @Column
-    var refreshTokenExpiredAt: LocalDateTime?,
+    var refreshTokenExpiredAt: LocalDateTime? = null,
 
     @Column
-    val lastSignInAt: LocalDateTime?,
+    val lastSignInAt: LocalDateTime? = null,
 
     @Column
-    val oAuthProvider: OAuthProvider?,
+    val oAuthProvider: OAuthProvider? = null,
 
     @Column
     val deletedAt: LocalDateTime? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_group_id")
-    val memberGroup: MemberGroup?,
-): BaseEntity()
+    val memberGroup: MemberGroup? = null,
+) : BaseEntity() {
+    constructor(
+        dto: MemberDTO.RegisterRequestDTO,
+        encryptedPassword: String
+    ) : this(
+        id = 0L,
+        username = dto.username,
+        encryptedPassword = encryptedPassword,
+        email = dto.email,
+        name = dto.name
+    )
+}

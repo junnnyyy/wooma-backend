@@ -10,5 +10,5 @@ class MemberGroup(
     val id: Long = 0L,
 
     @OneToMany(mappedBy = "memberGroup")
-    val members: MutableList<Member> = mutableListOf(),
+    val members: List<Member> = mutableListOf(),
 ): BaseEntity()
