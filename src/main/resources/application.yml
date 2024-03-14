@@ -16,25 +16,40 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-name: wooma-web
-            client-id: ENC(gyuRB0vCke3ZkvWNbCgvh/2OCGSjyByCJ8LDX7AGeFUH6/Hp9OVZFAfFKnqy/dHF3OAfDG+jlGfeTtoHO5Izy6PWl7RzGj8hcGCCH0M0oM3aj9VVLt+NR4TAZ+oGMNZq)
-            client-secret: ENC(kzv0eeCxY4C35Iqdv9eLFn3O/qJfNaSZrgVdTnVzBqjbRodLaIu0GVi8cynxJ1GqGAjcoWdtQ0M=)
+    show-sql: true
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-name: wooma-web
+#            client-id: ENC(gyuRB0vCke3ZkvWNbCgvh/2OCGSjyByCJ8LDX7AGeFUH6/Hp9OVZFAfFKnqy/dHF3OAfDG+jlGfeTtoHO5Izy6PWl7RzGj8hcGCCH0M0oM3aj9VVLt+NR4TAZ+oGMNZq)
+#            client-secret: ENC(kzv0eeCxY4C35Iqdv9eLFn3O/qJfNaSZrgVdTnVzBqjbRodLaIu0GVi8cynxJ1GqGAjcoWdtQ0M=)
+#            redirect-uri: http://localhost:8080/login/oauth2/code/google
 #          kakao:
 #            oauth-api-host: https://kauth.kakao.com/oauth
 #            key:
 #              client-id: ENC(kqjMcJp110C+i7K3uN45BkY2zqP9Ku17)
 #              rest-api: ENC(QfUeGCljsVvcRTiYAlmRprmoeTmvMA+IvWVgcKhps6NfI0ENvblERyMgaeiVJwSr6KdJ3MVFOSk)
-
-
+# swagger setting
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger
+    operations-sorter: alpha
+    tags-sorter: alpha
+    disable-swagger-default-url: true
+    display-request-duration: true
+    filter: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
 
   jackson:
     time-zone: Asia/Seoul
@@ -42,6 +57,10 @@ spring:
 jasypt:
   encryptor:
     algorithm: PBEWithMD5AndDES
+    bean: jasyptStringEncryptor
+    pool-size: 1
+    string-output-type: base64
+    key-obtention-iterations: 1000
 kakao:
   oauth-api-host: https://kauth.kakao.com/oauth
   key:
