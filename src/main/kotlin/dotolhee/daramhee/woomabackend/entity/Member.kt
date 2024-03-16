@@ -3,6 +3,9 @@ package dotolhee.daramhee.woomabackend.entity
 import dotolhee.daramhee.woomabackend.OAuthProvider
 import dotolhee.daramhee.woomabackend.dto.MemberDTO
 import jakarta.persistence.*
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -20,10 +23,14 @@ class Member(
     val encryptedPassword: String,
 
     @Column
+    @Email(message = "올바른 이메일 형식이 아닙니다.")
     val email: String,
 
     @Column
     val name: String,
+
+    @Column
+    val birthDate: LocalDate?,
 
     @Column
     var token: String? = null,
@@ -58,6 +65,7 @@ class Member(
         username = dto.username,
         encryptedPassword = encryptedPassword,
         email = dto.email,
-        name = dto.name
+        name = dto.name,
+        birthDate = dto.birthDate,
     )
 }
