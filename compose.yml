@@ -1,23 +1,23 @@
 version: "3"
 services:
-  db: # 서비스 명
-    image: mysql:latest # 사용할 이미지
-    platform: linux/amd64
-    container_name: wooma-mysql # 컨테이너 이름 설정
-    ports:
-      - '3306:3306' # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
-    environment: # -e 옵션
-      MYSQL_ROOT_PASSWORD: verysecret
-      MYSQL_DATABASE: wooma
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: secret
+  mysql:
+    image: library/mysql:8.0
+    container_name: wooma_container
+    restart: always
+    environment:
       TZ: Asia/Seoul
-    command: # 명령어 실행
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_general_ci
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: wooma_root_secret
+      MYSQL_USER: wooma
+      MYSQL_PASSWORD: wooma_secret
+      MYSQL_DATABASE: wooma_local
+      DATABASE_HOST: 127.0.0.1
+    ports:
+      - '3306:3306'
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./data/mysql/:/var/lib/mysql
-
+    platform: linux/amd64
 #  local db용
 #  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 #  FLUSH PRIVILEGES;

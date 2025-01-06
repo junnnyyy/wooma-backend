@@ -14,19 +14,20 @@ spring:
     encoding: UTF-8
     fallback-to-system-locale: false
   datasource:
-    url: jdbc:mysql://localhost:3306/wooma?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
-    username: ENC(jfmVuCZXLZ86dqrgE6tgdXnOE0NQ4pIA)
-    password: ENC(SbSyEVfK+yIsgExwBbRpCIe99zHQRK1DUi9TjgbBKQA=)
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/wooma_local?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: ENC(5y442vDduS348JoZzh9PhSLn3d/mXf8kZE/T68sr1pZUkZZEJ5TyePYJWeCRwLIk)
+    password: ENC(EsKScBjktO3sajCMgRpNkbzVEbTvqtsft/zIevRUxXTXUp6v1Q0yPlwBOLft0TMvC3BZlY3w6C+F3pbb4DFDRg==)
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
+        new_generator_mapping: true
+        discriminator:
+          ignore_explicit_for_joined: true
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
-  mvc:
-    throw-exception-if-no-handler-found: true
 #  security:
 #    oauth2:
 #      client:
@@ -59,14 +60,6 @@ springdoc:
 
   jackson:
     time-zone: Asia/Seoul
-
-jasypt:
-  encryptor:
-    algorithm: PBEWithMD5AndDES
-    bean: jasyptStringEncryptor
-    pool-size: 1
-    string-output-type: base64
-    key-obtention-iterations: 1000
 kakao:
   oauth-api-host: https://kauth.kakao.com/oauth
   key:
